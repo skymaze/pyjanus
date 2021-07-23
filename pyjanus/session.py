@@ -29,7 +29,7 @@ class Session(AsyncIOEventEmitter):
             handle = self._handles.get(message["sender"])
             await handle.on_handle_data(message)
         else:
-            print(f"on session message: {message}")
+            self.emit("message", message)
 
     async def attach(self, plugin: str):
         transaction = await self.send({"janus": "attach", "plugin": plugin})
