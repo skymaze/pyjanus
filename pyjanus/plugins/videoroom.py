@@ -6,7 +6,7 @@ from pydantic import BaseModel
 # Video Room API
 class CreateRequest(BaseModel):
     # unique ID, optional, chosen by plugin if missing
-    room: Optional[Union[str, int]] = None
+    room: Optional[Union[int, str]] = None
     # true|false, whether the room should be saved in the config file, default=false
     permanent: Optional[bool] = None
     # pretty name of the room, optional
@@ -77,7 +77,7 @@ class CreateRequest(BaseModel):
 
 class EditRequest(BaseModel):
     # unique ID of the room to edit
-    room: Optional[Union[str, int]] = None
+    room: Optional[Union[int, str]] = None
     # room secret, mandatory if configured
     secret: Optional[str] = None
     # new pretty name of the room, optional
@@ -106,7 +106,7 @@ class EditRequest(BaseModel):
 
 class DestoryRequest(BaseModel):
     # unique ID of the room to destroy
-    room: Union[str, int]
+    room: Union[int, str]
     # room secret, mandatory if configured
     secret: Optional[str] = None
     # true|false, whether the room should be also removed from the config file, default=false
@@ -117,7 +117,7 @@ class DestoryRequest(BaseModel):
 
 class ExistsRequest(BaseModel):
     # unique ID of the room to destroy
-    room: Union[str, int]
+    room: Union[int, str]
     # request
     request: str = "exist"
 
@@ -128,7 +128,7 @@ class AllowedRequest(BaseModel):
     # enable|disable|add|remove
     action: Literal["enable", "disable", "add", "remove"]
     # unique ID of the room to update
-    room: Union[str, int]
+    room: Union[int, str]
     # Array of strings (tokens users might pass in "join", only for add|remove)
     allowed: Optional[List[str]] = None
     # request
@@ -139,9 +139,9 @@ class KickRequest(BaseModel):
     # room secret, mandatory if configured
     secret: Optional[str] = None
     # unique ID of the room
-    room: Union[str, int]
+    room: Union[int, str]
     # unique ID of the participant to kick
-    id: Union[str, int]
+    id: Union[int, str]
     # request
     request: str = "kick"
 
@@ -150,9 +150,9 @@ class ModerateRequest(BaseModel):
     # room secret, mandatory if configured
     secret: Optional[str] = None
     # unique ID of the room
-    room: Union[str, int]
+    room: Union[int, str]
     # unique ID of the participant to moderate
-    id: Union[str, int]
+    id: Union[int, str]
     # mid of the m-line to refer to for this moderate request
     mid: str
     # true|false, depending on whether the media addressed by the above mid should be muted by the moderator
@@ -168,7 +168,7 @@ class ListRequest(BaseModel):
 
 class ListparticipantsRequest(BaseModel):
     # unique ID of the room
-    room: Union[str, int]
+    room: Union[int, str]
     # request
     request: str = "listparticipants"
 
@@ -176,9 +176,9 @@ class ListparticipantsRequest(BaseModel):
 # VideoRoom Publishers
 class PublisherJoinRequest(BaseModel):
     # unique ID of the room
-    room: Union[str, int]
+    room: Union[int, str]
     # unique ID to register for the publisher; optional, will be chosen by the plugin if missing
-    id: Optional[Union[str, int]] = None
+    id: Optional[Union[int, str]] = None
     # display name for the publisher; optional
     display: Optional[str] = None
     # invitation token, in case the room has an ACL; optional
@@ -246,18 +246,18 @@ class LeaveRequest(BaseModel):
 # VideoRoom Subscribers
 class Stream(BaseModel):
     # unique ID of publisher owning the stream to subscribe to
-    feed_id: Union[str, int]
+    feed_id: Union[int, str]
     # unique mid of the publisher stream to subscribe to; optional
     mid: Optional[str] = None
 
 
 class SubscriberJoinRequest(BaseModel):
     # unique ID of the room
-    room: Union[str, int]
+    room: Union[int, str]
     # unique ID of the publisher to subscribe to; mandatory
-    feed: Union[str, int]
+    feed: Union[int, str]
     # unique ID of the publisher that originated this request; optional, unless mandated by the room configuration
-    private_id: Optional[Union[str, int]] = None
+    private_id: Optional[Union[int, str]] = None
     # Other streams to subscribe to
     streams: Optional[List[Stream]]
     # participant type
@@ -318,7 +318,7 @@ class SubscribeConfigureRequest(BaseModel):
 
 class SwitchStream(BaseModel):
     # unique ID of the publisher the new source is from
-    feed: Union[str, int]
+    feed: Union[int, str]
     # unique mid of the source we want to switch to
     mid: str
     # unique mid of the stream we want to pipe the new source to
