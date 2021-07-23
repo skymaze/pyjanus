@@ -6,7 +6,7 @@ authors = ["Jiang Yue"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.6.9"
 pyee = "^8.1.0"
 websockets = "^9.1"
 pydantic = "^1.8.2"

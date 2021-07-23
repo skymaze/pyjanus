@@ -16,7 +16,7 @@ class Session(AsyncIOEventEmitter):
         self._handles: Dict[str, Handle] = {}
         self._keepalive_timeout = keepalive_timeout
         if keepalive_timeout:
-            self._keepalive_task = asyncio.create_task(self._run_keepalive())
+            self._keepalive_task = self._loop.create_task(self._run_keepalive())
         else:
             self._keepalive_task = None
 
